@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pilote V2 · Ton cocon</title>
+    <meta name="theme-color" content="#9ec9ff" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icons/icon-maskable.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app" class="cocon" aria-live="polite">
+      <section id="cocon-view" class="view" data-view="cocon">
+        <div class="sphere" aria-hidden="true"></div>
+        <p id="breathAssist" class="sr-only">
+          Inspire pendant quatre secondes, expire pendant six secondes.
+        </p>
+        <div class="controls">
+          <button type="button" data-action="restart" aria-describedby="breathAssist">
+            Encore
+          </button>
+          <button type="button" data-action="inviter">Inviter</button>
+          <button type="button" data-action="autonomie">Mode autonomie</button>
+        </div>
+      </section>
+
+      <section id="autonomie-view" class="view" data-view="autonomie" hidden>
+        <div class="sphere static" aria-hidden="true"></div>
+        <p class="gentle">Essaie sans moi. Tu peux revenir quand tu veux.</p>
+        <div class="timer" aria-live="off">
+          <span id="autonomy-time">01:00</span>
+          <div class="timer-buttons">
+            <button type="button" data-action="autonomy-toggle">Démarrer</button>
+            <button type="button" data-action="autonomy-reset">Réinitialiser</button>
+          </div>
+        </div>
+        <div id="autonomy-outcome" class="gentle" hidden>
+          <p>Tu as essayé.</p>
+          <button type="button" data-action="back-to-cocon">Retour au cocon</button>
+        </div>
+        <button type="button" data-action="back-to-cocon" class="ghost">Retour</button>
+      </section>
+
+      <section id="inviter-view" class="view" data-view="inviter" hidden>
+        <div id="inviter-breath" class="inviter-stage" data-stage="breath">
+          <div class="sphere" aria-hidden="true"></div>
+          <button type="button" data-action="back-to-cocon" class="ghost">Retour</button>
+        </div>
+        <div id="inviter-ritual" class="inviter-stage" data-stage="ritual" hidden>
+          <form id="ritual-form" novalidate>
+            <p class="gentle intro">Partage seulement si tu en as envie.</p>
+            <label>
+              <span>Ce qui s’est passé…</span>
+              <textarea name="happened" rows="2" maxlength="240"></textarea>
+            </label>
+            <label>
+              <span>Ce qui m’a aidé…</span>
+              <textarea name="helped" rows="2" maxlength="240"></textarea>
+            </label>
+            <label>
+              <span>La prochaine fois…</span>
+              <textarea name="next" rows="2" maxlength="240"></textarea>
+            </label>
+            <div class="ritual-actions">
+              <button type="button" data-action="ritual-skip">Pas maintenant</button>
+              <button type="submit">Terminer</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="completion-panel" class="panel" hidden>
+        <p id="completion-text"></p>
+        <button type="button" data-action="close-panel">Fermer</button>
+      </section>
+    </main>
+
+    <template id="messages-template">
+      <option value="0">Tu as pris un moment pour toi.</option>
+      <option value="1">Tu as utilisé ton outil.</option>
+      <option value="2">Tu as choisi de te recentrer.</option>
+      <option value="3">Tu peux revenir quand tu en as besoin.</option>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
