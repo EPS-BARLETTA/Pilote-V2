@@ -8,7 +8,7 @@
   "description": "Respiration guidée et rituels doux, sans collecte ni suivi.",
   "icons": [
     {
-      "src": "icons/icon-maskable.svg",
+      "src": "./icons/icon-maskable.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
